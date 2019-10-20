@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "com.github.draylar.modid.mixin",
+  "package": "com.github.draylar.tutorial.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-
+    "LocateCommandMixin"
   ],
   "injectors": {
     "defaultRequire": 1

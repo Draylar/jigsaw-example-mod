@@ -1,11 +1,11 @@
 
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "tutorial_jigsaws",
   "version": "${version}",
 
-  "name": "Fabric Example Mod",
-  "description": "Draylar's Fabric Example Mod!",
+  "name": "Jigsaw Tutorial",
+  "description": "Tutorial mod on Jigsaws",
   "authors": [
     "Draylar"
   ],
@@ -15,23 +15,19 @@
   },
 
   "license": "GPLv3",
-  "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.draylar.modid.ExampleMod"
+      "com.github.draylar.tutorial.TutorialJigsaws"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "tutorialjigsaws.mixins.json"
   ],
 
   "requires": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }
