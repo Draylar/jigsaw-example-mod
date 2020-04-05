@@ -42,8 +42,8 @@ public class TutorialJigsaws implements ModInitializer
 	public void onInitialize()
 	{
 		Registry.BIOME.forEach(biome -> {
-			biome.addFeature(GenerationStep.Feature.RAW_GENERATION, Biome.configureFeature(FEATURE, new DefaultFeatureConfig(), Decorator.NOPE, DecoratorConfig.DEFAULT));
-			biome.addStructureFeature(FEATURE, new DefaultFeatureConfig());
+			biome.addFeature(GenerationStep.Feature.RAW_GENERATION, FEATURE.configure(new DefaultFeatureConfig()).createDecoratedFeature(Decorator.NOPE.configure(DecoratorConfig.DEFAULT)));
+			biome.addStructureFeature(FEATURE.configure(new DefaultFeatureConfig()));
 		});
 	}
 }
