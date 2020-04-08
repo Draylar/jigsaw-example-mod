@@ -8,8 +8,8 @@ import net.minecraft.structure.pool.SinglePoolElement;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -19,8 +19,8 @@ public class ExampleStructureStart extends StructureStart {
     private static final Identifier BASE_POOL = new Identifier("tutorial:base_pool");
     private static final Identifier COLOR_POOL = new Identifier("tutorial:color_pool");
 
-    ExampleStructureStart(StructureFeature<?> feature, int x, int z, Biome biome, MutableIntBoundingBox box, int int_3, long seed) {
-        super(feature, x, z, biome, box, int_3, seed);
+    ExampleStructureStart(StructureFeature<?> feature, int x, int z, BlockBox box, int int_3, long seed) {
+        super(feature, x, z, box, int_3, seed);
     }
 
     @Override
