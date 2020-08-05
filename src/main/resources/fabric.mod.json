@@ -22,12 +22,14 @@
       "com.github.draylar.tutorial.TutorialJigsaws"
     ]
   },
+  "accessWidener": "tutorialjigsaws.accesswidener",
   "mixins": [
     "tutorialjigsaws.mixins.json"
   ],
 
   "requires": {
-    "fabricloader": ">=0.4.0",
-    "fabric": "*"
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
   }
 }
