@@ -1,37 +1,51 @@
 package com.github.draylar.tutorial.features.example;
 
-import com.mojang.datafixers.Dynamic;
-import net.minecraft.world.gen.feature.AbstractTempleFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import com.mojang.serialization.*;
+import net.minecraft.structure.*;
+import net.minecraft.structure.pool.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.biome.*;
+import net.minecraft.world.biome.source.*;
+import net.minecraft.world.gen.*;
+import net.minecraft.world.gen.chunk.*;
+import net.minecraft.world.gen.feature.*;
 
-import java.util.function.Function;
+public class ExampleFeature extends StructureFeature<StructurePoolFeatureConfig> {
 
-public class ExampleFeature extends AbstractTempleFeature<DefaultFeatureConfig> {
-
-    public ExampleFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> config) {
-        super(config);
+    public ExampleFeature(Codec<StructurePoolFeatureConfig> codec) {
+        super(codec);
     }
 
     @Override
-    protected int getSeedModifier() {
-        return 0;
+    public StructureStartFactory<StructurePoolFeatureConfig> getStructureStartFactory() {
+        return Start::new;
     }
 
     @Override
-    public StructureStartFactory getStructureStartFactory() {
-        return ExampleStructureStart::new;
+    protected boolean shouldStartAt(ChunkGenerator chunkGenerator, BiomeSource biomeSource, long l, ChunkRandom chunkRandom, int i, int j, Biome biome, ChunkPos chunkPos, StructurePoolFeatureConfig featureConfig) {
+        return chunkRandom.nextInt(150) == 0; // 1 in 150
     }
 
-    // used for structure feature location
-    @Override
-    public String getName() {
-        return "TutorialJigsaw";
-    }
+    public static class Start extends StructureStart<StructurePoolFeatureConfig> {
 
-    // radius seems to be the max size of a piece inside a chunk
-    // I assume it is used for random rotation and placement
-    @Override
-    public int getRadius() {
-        return 2;
+        Start(StructureFeature<StructurePoolFeatureConfig> feature, int x, int z, BlockBox box, int int_3, long seed) {
+            super(feature, x, z, box, int_3, seed);
+        }
+
+        @Override
+        public void init(ChunkGenerator chunkGenerator, StructureManager structureManager, int x, int z, Biome biome,
+                         StructurePoolFeatureConfig config) {
+            BlockPos pos = new BlockPos(x * 16, 80, z * 16);
+
+            boolean randomYPos = false;
+            boolean calculateMaxYFromPiecePositions = false;
+
+            ExamplePiece.init();
+
+            StructurePoolBasedGenerator.addPieces(config.startPool, config.size, ExamplePiece::new, chunkGenerator, structureManager,
+                    pos, children, random, calculateMaxYFromPiecePositions, randomYPos);
+
+            setBoundingBoxFromChildren();
+        }
     }
 }
